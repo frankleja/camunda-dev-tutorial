@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_13sumcd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
+  <bpmn:process id="Exclusive_Gateway_Test" name="Exclusive Gateway Test" isExecutable="true" camunda:versionTag="1.0.0">
+    <bpmn:startEvent id="StartEvent_1" name="Start Decision">
+      <bpmn:extensionElements>
+        <camunda:formData businessKey="FormField_38i6k7a">
+          <camunda:formField id="decision" label="Decision" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_017mw7q</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_183j40m" name="decision true?" default="SequenceFlow_10eivab">
+      <bpmn:incoming>SequenceFlow_017mw7q</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_02nu9en</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_10eivab</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_017mw7q" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_183j40m" />
+    <bpmn:sequenceFlow id="SequenceFlow_02nu9en" name="yes" sourceRef="ExclusiveGateway_183j40m" targetRef="Task_1o26ft1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_10eivab" name="no" sourceRef="ExclusiveGateway_183j40m" targetRef="Task_1viidc7" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0lscunu">
+      <bpmn:incoming>SequenceFlow_16rpopx</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0fcyfgk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1m2azq4</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_16rpopx" sourceRef="Task_1viidc7" targetRef="ExclusiveGateway_0lscunu" />
+    <bpmn:sequenceFlow id="SequenceFlow_0fcyfgk" sourceRef="Task_1o26ft1" targetRef="ExclusiveGateway_0lscunu" />
+    <bpmn:endEvent id="EndEvent_0jb775u" name="End Decision">
+      <bpmn:incoming>SequenceFlow_1m2azq4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1m2azq4" sourceRef="ExclusiveGateway_0lscunu" targetRef="EndEvent_0jb775u" />
+    <bpmn:userTask id="Task_1o26ft1" name="true task">
+      <bpmn:incoming>SequenceFlow_02nu9en</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0fcyfgk</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_1viidc7" name="false task">
+      <bpmn:incoming>SequenceFlow_10eivab</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_16rpopx</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Exclusive_Gateway_Test">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="155" y="241" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="139" y="284" width="69" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_183j40m_di" bpmnElement="ExclusiveGateway_183j40m" isMarkerVisible="true">
+        <dc:Bounds x="265" y="234" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="255" y="294" width="69" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_017mw7q_di" bpmnElement="SequenceFlow_017mw7q">
+        <di:waypoint x="191" y="259" />
+        <di:waypoint x="265" y="259" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_02nu9en_di" bpmnElement="SequenceFlow_02nu9en">
+        <di:waypoint x="290" y="234" />
+        <di:waypoint x="290" y="121" />
+        <di:waypoint x="435" y="121" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="297" y="178" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_10eivab_di" bpmnElement="SequenceFlow_10eivab">
+        <di:waypoint x="315" y="259" />
+        <di:waypoint x="435" y="259" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="361" y="243" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0lscunu_di" bpmnElement="ExclusiveGateway_0lscunu" isMarkerVisible="true">
+        <dc:Bounds x="657" y="234" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_16rpopx_di" bpmnElement="SequenceFlow_16rpopx">
+        <di:waypoint x="535" y="259" />
+        <di:waypoint x="657" y="259" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0fcyfgk_di" bpmnElement="SequenceFlow_0fcyfgk">
+        <di:waypoint x="535" y="121" />
+        <di:waypoint x="682" y="121" />
+        <di:waypoint x="682" y="234" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0jb775u_di" bpmnElement="EndEvent_0jb775u">
+        <dc:Bounds x="809" y="241" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="795" y="284" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1m2azq4_di" bpmnElement="SequenceFlow_1m2azq4">
+        <di:waypoint x="707" y="259" />
+        <di:waypoint x="809" y="259" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0q0myg2_di" bpmnElement="Task_1o26ft1">
+        <dc:Bounds x="435" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0tzgpfj_di" bpmnElement="Task_1viidc7">
+        <dc:Bounds x="435" y="219" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
