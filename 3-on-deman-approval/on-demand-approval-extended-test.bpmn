@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0wor8yx" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
+  <bpmn:process id="On_Demand_Approval_Ext_Test" name="On Demand Approval Ext Test" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="invoiceAmount" label="Invoice Amount" type="long" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0blt2qr</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="Task_1qlpt3v" triggeredByEvent="true">
+      <bpmn:sequenceFlow id="SequenceFlow_08swqfa" sourceRef="StartEvent_1w0dv9l" targetRef="Task_0dx91aj" />
+      <bpmn:endEvent id="EndEvent_0gr6cx8">
+        <bpmn:incoming>SequenceFlow_0xq8x16</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_0xq8x16" sourceRef="Task_0dx91aj" targetRef="EndEvent_0gr6cx8" />
+      <bpmn:userTask id="Task_0dx91aj" name="Approve Invoice">
+        <bpmn:incoming>SequenceFlow_08swqfa</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_0xq8x16</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:startEvent id="StartEvent_1w0dv9l" name="Approval needed?" isInterrupting="false">
+        <bpmn:outgoing>SequenceFlow_08swqfa</bpmn:outgoing>
+        <bpmn:conditionalEventDefinition>
+          <bpmn:condition xsi:type="bpmn:tFormalExpression">${approvalNeeded}</bpmn:condition>
+        </bpmn:conditionalEventDefinition>
+      </bpmn:startEvent>
+      <bpmn:boundaryEvent id="BoundaryEvent_04slot3" name="Approval cancelled&#10;&#10;" attachedToRef="Task_0dx91aj">
+        <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1bbsxdz">
+          <bpmn:condition xsi:type="bpmn:tFormalExpression">${!approvalNeeded}</bpmn:condition>
+        </bpmn:conditionalEventDefinition>
+      </bpmn:boundaryEvent>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="SequenceFlow_0blt2qr" sourceRef="StartEvent_1" targetRef="Task_0b02u7m" />
+    <bpmn:userTask id="Task_0b02u7m" name="review invoice">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="approvalNeeded" label="Approval Needed" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0blt2qr</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zc9w5o</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_0nhgwfn">
+      <bpmn:incoming>SequenceFlow_0icur0n</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0zc9w5o" sourceRef="Task_0b02u7m" targetRef="Task_1daiips" />
+    <bpmn:userTask id="Task_1daiips" name="2nd review">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="approvalNeeded" label="Approval needed?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0zc9w5o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0icur0n</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0icur0n" sourceRef="Task_1daiips" targetRef="EndEvent_0nhgwfn" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="On_Demand_Approval_Ext_Test">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="212" y="103" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_0i78r05_di" bpmnElement="Task_1qlpt3v" isExpanded="true">
+        <dc:Bounds x="179" y="241" width="462" height="298" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_08swqfa_di" bpmnElement="SequenceFlow_08swqfa">
+        <di:waypoint x="251" y="341" />
+        <di:waypoint x="364" y="341" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0gr6cx8_di" bpmnElement="EndEvent_0gr6cx8">
+        <dc:Bounds x="549" y="323" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0xq8x16_di" bpmnElement="SequenceFlow_0xq8x16">
+        <di:waypoint x="464" y="341" />
+        <di:waypoint x="549" y="341" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0blt2qr_di" bpmnElement="SequenceFlow_0blt2qr">
+        <di:waypoint x="248" y="121" />
+        <di:waypoint x="360" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1tgx8vy_di" bpmnElement="Task_0b02u7m">
+        <dc:Bounds x="360" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_04ggy9z_di" bpmnElement="Task_0dx91aj">
+        <dc:Bounds x="364" y="301" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0nhgwfn_di" bpmnElement="EndEvent_0nhgwfn">
+        <dc:Bounds x="864" y="103" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_07xbc4u_di" bpmnElement="StartEvent_1w0dv9l">
+        <dc:Bounds x="215" y="323" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="190" y="366" width="89" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zc9w5o_di" bpmnElement="SequenceFlow_0zc9w5o">
+        <di:waypoint x="460" y="121" />
+        <di:waypoint x="597" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1do07uh_di" bpmnElement="Task_1daiips">
+        <dc:Bounds x="597" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0icur0n_di" bpmnElement="SequenceFlow_0icur0n">
+        <di:waypoint x="697" y="121" />
+        <di:waypoint x="864" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_0euhcg8_di" bpmnElement="BoundaryEvent_04slot3">
+        <dc:Bounds x="446" y="363" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="442" y="406" width="47" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
