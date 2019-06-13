@@ -42,18 +42,18 @@
         <dc:Bounds x="212" y="103" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_0i78r05_di" bpmnElement="Task_1qlpt3v" isExpanded="true">
-        <dc:Bounds x="179" y="241" width="462" height="206" />
+        <dc:Bounds x="179" y="180" width="462" height="206" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_08swqfa_di" bpmnElement="SequenceFlow_08swqfa">
-        <di:waypoint x="251" y="341" />
-        <di:waypoint x="364" y="341" />
+        <di:waypoint x="251" y="280" />
+        <di:waypoint x="364" y="280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0gr6cx8_di" bpmnElement="EndEvent_0gr6cx8">
-        <dc:Bounds x="549" y="323" width="36" height="36" />
+        <dc:Bounds x="549" y="262" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0xq8x16_di" bpmnElement="SequenceFlow_0xq8x16">
-        <di:waypoint x="464" y="341" />
-        <di:waypoint x="549" y="341" />
+        <di:waypoint x="464" y="280" />
+        <di:waypoint x="549" y="280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0blt2qr_di" bpmnElement="SequenceFlow_0blt2qr">
         <di:waypoint x="248" y="121" />
@@ -63,7 +63,7 @@
         <dc:Bounds x="360" y="81" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_04ggy9z_di" bpmnElement="Task_0dx91aj">
-        <dc:Bounds x="364" y="301" width="100" height="80" />
+        <dc:Bounds x="364" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0nhgwfn_di" bpmnElement="EndEvent_0nhgwfn">
         <dc:Bounds x="547" y="103" width="36" height="36" />
@@ -73,9 +73,9 @@
         <di:waypoint x="547" y="121" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="StartEvent_07xbc4u_di" bpmnElement="StartEvent_1w0dv9l">
-        <dc:Bounds x="215" y="323" width="36" height="36" />
+        <dc:Bounds x="215" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="202" y="366" width="65" height="27" />
+          <dc:Bounds x="202" y="305" width="65" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
